@@ -1,0 +1,7 @@
+sqlplus / as sysdba;
+alter session set “_oracle_script”=true; (двойные кавычки пишите 
+сами без копирования)
+create user hr identified by hr account unlock;
+grant dba to hr;
+conn hr/hr;
+@hr.sql
