@@ -50,3 +50,28 @@ select * from locations4europe;
 
 commit;
 
+update locations2 set postal_code = '777' where postal_code is null;
+
+commit;
+
+select * from locations2;
+
+update locations2 set postal_code = null where location_id <5;
+
+update locations2 set postal_code = (select postal_code from locations where location_id = 2600) where postal_code is null;
+
+commit;
+
+delete locations2 where country_id = 'IT';
+
+savepoint s1;
+
+update locations2 set street_address = 'Sezam st. 18' where location_id > 2500;
+
+savepoint s2;
+
+delete locations2 where street_address = 'Sezam st. 18';
+
+rollback to savepoint s1;
+
+commit;
